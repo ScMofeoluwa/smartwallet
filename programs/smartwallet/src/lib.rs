@@ -26,4 +26,10 @@ pub mod smartwallet {
 
         Ok(())
     }
+
+    pub fn settings(ctx: Context<Settings>, limit: Limit) -> Result<()> {
+        ctx.accounts.update_limit(limit)?;
+
+        Ok(())
+    }
 }

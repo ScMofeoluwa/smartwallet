@@ -7,5 +7,7 @@ pub enum ErrorCode {
     #[msg("Daily per-transaction withdrawal limit exceeded")]
     TxLimitExceeded,
     #[msg("Insufficient Funds")]
-    InsufficientFunds
+    InsufficientFunds,
+    #[msg("Invalid Limit")]
+    InvalidLimit
 }

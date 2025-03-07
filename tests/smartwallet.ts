@@ -89,4 +89,19 @@ describe("smartwallet", () => {
       1 * anchor.web3.LAMPORTS_PER_SOL
     );
   });
+
+  it("Update Limits", async () => {
+    const totalLimit = new anchor.BN(100 * anchor.web3.LAMPORTS_PER_SOL);
+    const txLimit = new anchor.BN(10 * anchor.web3.LAMPORTS_PER_SOL);
+    const tx = await program.methods
+      .settings({ totalLimit: totalLimit, txLimit: txLimit })
+      .accounts({ owner: keypair.publicKey })
+      .signers([keypair])
+      .rpc();
+    console.log("Your transaction signature", tx);
+
+    const walletAccount = await program.account.wallet.fetch(walletPda)
+    assert.ok(walletAccount.totalLimit.eq(totalLimit))
+    assert.ok(walletAccount.txLimit.eq(txLimit))
+  });
 });
